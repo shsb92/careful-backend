@@ -13,13 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('cars', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->rememberToken();
+            $table->string('designation');
+            $table->string('vehicle_identification_number');
+            $table->unsignedBigInteger('auction_center_id')->index();
+            $table->foreign('auction_center_id')->references('id')->on('auction_centers')->onDelete('cascade');
+            $table->date('recorded_at');
             $table->timestamps();
         });
     }
@@ -31,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('cars');
     }
 };
