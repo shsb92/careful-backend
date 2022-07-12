@@ -7,12 +7,12 @@ use Illuminate\Support\Facades\Auth;
 
 class AuthApiController extends Controller
 {
-    public function response($employee)
+    public function response($user)
     {
-        $token = $employee->createToken( str()->random(40) )->plainTextTokern;
+        $token = $user->createToken( str()->random(40) )->plainTextTokern;
 
         return response()->json([
-            'user' => $employee,
+            'user' => $user,
             'token' => $token,
             'token_type'=> 'Bearer',
         ]);
@@ -21,7 +21,7 @@ class AuthApiController extends Controller
     public function login(Request $request)
     {
         $cred = $request->validate([
-            'email' => 'required|email|exists:employees',
+            'email' => 'required|email|exists:users',
             'password' => 'required|min:4',
         ]);
 
@@ -36,7 +36,7 @@ class AuthApiController extends Controller
 
     public function logout()
     {
-        Auth::employees()->tokens()->delete();
+        Auth::users()->tokens()->delete();
 
         return response()->json([
             'message' => 'You have successfully logged out and the token was deleted.'

@@ -29,7 +29,7 @@ class User extends Authenticatable
     ];
 
     /**
-     * Get the role assigned to the employee.
+     * Get the role assigned to the user.
      *
      * @return Illuminate\Database\Eloquent\Relations\BelongsTo
      */
@@ -62,5 +62,5 @@ class User extends Authenticatable
      *
      * @var string
      */
-    protected $table = 'employees';
+    protected $table = 'users';
 }

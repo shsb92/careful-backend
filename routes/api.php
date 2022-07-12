@@ -23,10 +23,10 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/centers/{id}', 'App\Http\Controllers\AuctionCentersController@show')->name('center.show');
     Route::put('/center/{id}/update', 'App\Http\Controllers\AuctionCentersController@update')->name('center.update');
     Route::delete('/centers/{id}/delete', 'App\Http\Controllers\AuctionCentersController@delete')->name('center.delete');
-    // Employee Routes
-    Route::post('/employees/add', 'App\Http\Controllers\EmployeesController@store')->name('employee.add');
-    Route::get('/employees', 'App\Http\Controllers\EmployeesController@index')->name('employee.index');
-    Route::get('/employees/{id}', 'App\Http\Controllers\EmployeesController@show')->name('employee.show');
-    Route::put('/employees/{id}/update', 'App\Http\Controllers\EmployeesController@update')->name('employee.update');
-    Route::delete('/employees/{id}/delete', 'App\Http\Controllers\EmployeesController@delete')->name('employee.delete');
+    // User Routes
+    Route::post('/users/add', 'App\Http\Controllers\UsersController@store')->name('user.add');
+    Route::get('/users', 'App\Http\Controllers\UsersController@index')->name('user.index');
+    Route::get('/users/{id}', 'App\Http\Controllers\UsersController@show')->name('user.show');
+    Route::put('/users/{id}/update', 'App\Http\Controllers\UsersController@update')->name('user.update');
+    Route::delete('/users/{id}/delete', 'App\Http\Controllers\UsersController@delete')->name('user.delete');
 });

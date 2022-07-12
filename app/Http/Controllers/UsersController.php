@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 
-class EmployeesController extends Controller
+class UsersController extends Controller
 {
         /**
      * Function creates a new auction center.
@@ -17,24 +17,24 @@ class EmployeesController extends Controller
     public function store(Request $request) {
         $request->validate([
             'name' => 'required|min:3',
-            'email' => 'required|mail|unique:employees',
+            'email' => 'required|mail|unique:users',
             'password' => 'required|min:4|confirmed',
             'role_id' => 'required',
         ]);
 
-        $employee = new User();
-        $employee->name = $request->value['name'];
-        $employee->email = $request->value['email'];
-        $employee->password = bcrypt($request->value['password']);
-        $employee->street = $request->value['street'];
-        $employee->house_nr = $request->value['house_nr'];
-        $employee->city = $request->value['city'];
-        $employee->postal_code = $request->value['postal_code'];
-        $employee->job_title = $request->value['job_title'];
-        $employee->role_id = $request->value['role_id'];
-        $employee->save();
+        $user = new User();
+        $user->name = $request->value['name'];
+        $user->email = $request->value['email'];
+        $user->password = bcrypt($request->value['password']);
+        $user->street = $request->value['street'];
+        $user->house_nr = $request->value['house_nr'];
+        $user->city = $request->value['city'];
+        $user->postal_code = $request->value['postal_code'];
+        $user->job_title = $request->value['job_title'];
+        $user->role_id = $request->value['role_id'];
+        $user->save();
 
-        return $employee;
+        return $user;
     }
 
     /**
@@ -52,7 +52,7 @@ class EmployeesController extends Controller
      * Function returns data of a selected auction center.
      *
      * @param Illuminate\Http\Request $request
-     * @param App\Models\Employee $center
+     * @param App\Models\User $center
      *
      * @return Illuminate\Http\Response
      */
@@ -77,7 +77,7 @@ class EmployeesController extends Controller
      * Function deletes an auction center.
      *
      * @param Illuminate\Http\Request $request
-     * @param App\Models\Employee $center
+     * @param App\Models\User $center
      *
      * @return Illuminate\Http\Response
      */
