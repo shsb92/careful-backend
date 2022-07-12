@@ -2,14 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\AuctionCenter;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use App\Models\User;
 
-
-class AuctionCentersController extends Controller
+class EmployeesController extends Controller
 {
-    /**
+        /**
      * Function creates a new auction center.
      *
      * @param Illuminate\Http\Request $request
@@ -17,17 +15,26 @@ class AuctionCentersController extends Controller
      * @return Illuminate\Http\Response
      */
     public function store(Request $request) {
+        $request->validate([
+            'name' => 'required|min:3',
+            'email' => 'required|mail|unique:employees',
+            'password' => 'required|min:4|confirmed',
+            'role_id' => 'required',
+        ]);
 
-        $center = new AuctionCenter();
-        $center->company = $request->value['company'];
-        $center->location = $request->value['location'];
-        $center->street = $request->value['street'];
-        $center->house_nr = $request->value['house_nr'];
-        $center->city = $request->value['city'];
-        $center->postal_code = $request->value['postal_code'];
-        $center->save();
+        $employee = new User();
+        $employee->name = $request->value['name'];
+        $employee->email = $request->value['email'];
+        $employee->password = bcrypt($request->value['password']);
+        $employee->street = $request->value['street'];
+        $employee->house_nr = $request->value['house_nr'];
+        $employee->city = $request->value['city'];
+        $employee->postal_code = $request->value['postal_code'];
+        $employee->job_title = $request->value['job_title'];
+        $employee->role_id = $request->value['role_id'];
+        $employee->save();
 
-        return $center;
+        return $employee;
     }
 
     /**
@@ -38,19 +45,19 @@ class AuctionCentersController extends Controller
      * @return Illuminate\Http\Response
      */
     public function index() {
-        return AuctionCenter::all();
+        return User::all();
     }
 
     /**
      * Function returns data of a selected auction center.
      *
      * @param Illuminate\Http\Request $request
-     * @param App\Models\AuctionCenter $center
+     * @param App\Models\Employee $center
      *
      * @return Illuminate\Http\Response
      */
     public function show(Request $request) {
-        $center = AuctionCenter::where('id', $request->route('id'))->first();
+        $center = User::where('id', $request->route('id'))->first();
 
         return $center;
     }
@@ -70,12 +77,12 @@ class AuctionCentersController extends Controller
      * Function deletes an auction center.
      *
      * @param Illuminate\Http\Request $request
-     * @param App\Models\AuctionCenter $center
+     * @param App\Models\Employee $center
      *
      * @return Illuminate\Http\Response
      */
     public function delete(Request $request) {
-        $center = AuctionCenter::find($request->route('id'));
+        $center = User::find($request->route('id'));
         $center->delete();
 
         return response('Group deleted', 200);

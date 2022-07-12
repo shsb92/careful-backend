@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class AuctionCenter extends Model
 {
+    use HasFactory;
+
     protected $fillable = [
         'company',
         'location',
@@ -16,5 +18,10 @@ class AuctionCenter extends Model
         'postal_code'
     ];
 
-    use HasFactory;
+    /**
+     * The table associated with the model.
+     *
+     * @var string
+     */
+    protected $table = 'auction_centers';
 }
