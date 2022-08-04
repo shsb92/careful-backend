@@ -8,7 +8,7 @@ use App\Models\User;
 class UsersController extends Controller
 {
         /**
-     * Function creates a new auction center.
+     * Function creates a new auction user.
      *
      * @param Illuminate\Http\Request $request
      *
@@ -38,7 +38,7 @@ class UsersController extends Controller
     }
 
     /**
-     * Function returns list of all auction centers.
+     * Function returns list of all auction users.
      *
      * @param Illuminate\Http\Request $request
      *
@@ -49,21 +49,21 @@ class UsersController extends Controller
     }
 
     /**
-     * Function returns data of a selected auction center.
+     * Function returns data of a selected auction user.
      *
      * @param Illuminate\Http\Request $request
-     * @param App\Models\User $center
+     * @param App\Models\User $user
      *
      * @return Illuminate\Http\Response
      */
     public function show(Request $request) {
-        $center = User::where('id', $request->route('id'))->first();
+        $user = User::where('id', $request->route('id'))->first();
 
-        return $center;
+        return $user;
     }
     
     /**
-     * Function updates a given auction center.
+     * Function updates a given auction user.
      *
      * @param Illuminate\Http\Request $request
      *
@@ -74,7 +74,7 @@ class UsersController extends Controller
     }
 
     /**
-     * Function deletes an auction center.
+     * Function deletes an auction user.
      *
      * @param Illuminate\Http\Request $request
      * @param App\Models\User $center
@@ -82,8 +82,8 @@ class UsersController extends Controller
      * @return Illuminate\Http\Response
      */
     public function delete(Request $request) {
-        $center = User::find($request->route('id'));
-        $center->delete();
+        $user = User::find($request->route('id'));
+        $user->delete();
 
         return response('Group deleted', 200);
     }

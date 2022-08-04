@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthApiController;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -15,6 +16,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::post('login', [AuthApiController::class,'login']);
+Route::get('user/admin', function(){
+    $user = User::where('id', 1)->first();
+
+    return $user->tokens;
+});
 
 Route::middleware('auth:sanctum')->group(function () {
     // Auction Center Routes
@@ -29,4 +35,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/users/{id}', 'App\Http\Controllers\UsersController@show')->name('user.show');
     Route::put('/users/{id}/update', 'App\Http\Controllers\UsersController@update')->name('user.update');
     Route::delete('/users/{id}/delete', 'App\Http\Controllers\UsersController@delete')->name('user.delete');
+    // Roles Routes
+    Route::get('/roles', 'App\Http\Controllers\RolesController@index')->name('roles.get');
+    // Car Routes
+    // Invoice Routes
+    // BaseData Routes
 });
